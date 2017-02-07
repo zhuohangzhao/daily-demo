@@ -5,4 +5,3 @@
 - 弹框组件
 - gotop组件
 - stickup组件
-- datapicker组件
