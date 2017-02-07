@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CSS-3D-Carousel</title>
+    <style>
+
+        body {
+            background-color: #c09191;
+        }
+        h2 {
+            text-align: center;
+        }
+        .container {
+            width: 210px;
+            height: 140px;
+            position: relative;
+            perspective: 1200px;
+            left: 45%;
+            top: 100px;
+
+        }
+
+        #carousel {
+            position: relative;
+            transform-style: preserve-3d;
+            animation: carousel linear infinite 36s ;
+            cursor: pointer;
+        }
+
+        #carousel img {
+            display: block;
+            position: absolute;
+            width: 186px;
+            height: 116px;
+            border: 1px solid #dddddd;
+            background: #f1f1f1;
+            padding: 5px;
+        }
+        #carousel:hover {
+            animation-play-state: paused;
+        }
+        @keyframes carousel{
+            0% {
+                transform:  rotateY(0deg);
+            }
+            100% {
+                transform:  rotateY(360deg);
+            }
+        }
+
+        #carousel img:nth-child(1) { transform: rotateY(   0deg ) translateZ( 288px ); }
+        #carousel img:nth-child(2) { transform: rotateY(  40deg ) translateZ( 288px ); }
+        #carousel img:nth-child(3) { transform: rotateY(  80deg ) translateZ( 288px ); }
+        #carousel img:nth-child(4) { transform: rotateY( 120deg ) translateZ( 288px ); }
+        #carousel img:nth-child(5) { transform: rotateY( 160deg ) translateZ( 288px ); }
+        #carousel img:nth-child(6) { transform: rotateY( 200deg ) translateZ( 288px ); }
+        #carousel img:nth-child(7) { transform: rotateY( 240deg ) translateZ( 288px ); }
+        #carousel img:nth-child(8) { transform: rotateY( 280deg ) translateZ( 288px ); }
+        #carousel img:nth-child(9) { transform: rotateY( 320deg ) translateZ( 288px ); }
+
+    </style>
+</head>
+<body>
+    <h2>CSS-Carousel</h2>
+    <section class="container">
+        <div id="carousel">
+            <img src="./img/p1.jpg" alt="">
+            <img src="./img/p2.jpg" alt="">
+            <img src="./img/p3.jpg" alt="">
+            <img src="./img/p4.jpg" alt="">
+            <img src="./img/p5.jpg" alt="">
+            <img src="./img/p6.jpg" alt="">
+            <img src="./img/p7.jpg" alt="">
+            <img src="./img/p8.jpg" alt="">
+            <img src="./img/p9.jpg" alt="">
+        </div>
+    </section>
+</body>
+</html>
