@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>stickup2</title>
+</head>
+<style>
+	.layout{
+		margin: 0 auto;
+		width: 900px;
+	}
+	#header .layout{
+		background-color: red;
+		height: 50px;
+	}
+	.nav{
+		height: 30px;
+		background-color: yellow;
+		margin-top: 20px;
+		border: 1px solid #ccc;
+		line-height: 1;
+	}
+	.ct:after{
+		content: '';
+		display: block;
+		clear: both;
+	}
+	.aside{
+		height: 300px;
+		width: 200px;
+		background-color: pink;
+		float: left;
+	}
+	.main{
+		height: 300px;
+		width: 680px;
+		background-color: blue;
+		float: right;
+	}
+	#footer .layout{
+		background-color: #ccc;
+		height: 50px;
+		margin-top: 10px;
+	}
+</style>
+<body>
+	<div id="header">
+		<div class="layout">header</div>
+	</div>
+	<div id="container">
+		<div class="layout">
+			<div class="ct">
+				<div class="nav nav1">nav1</div>
+				<div class="aside aside1">aside1</div>
+				<div class="main">main1</div>
+			</div>
+			<div class="ct">
+				<div class="nav nav2">nav2</div>
+				<div class="aside">aside2</div>
+				<div class="main main2">main2</div>
+			</div>
+			<div class="ct">
+				<div class="nav nav3">nav3</div>
+				<div class="aside">aside3</div>
+				<div class="main">main3</div>
+			</div>
+			<div class="ct">
+				<div class="nav nav4">nav4</div>
+				<div class="aside">aside4</div>
+				<div class="main">main4</div>
+			</div>
+		</div>
+	</div>
+	<div id="footer">
+		<div class="layout">footer</div>
+	</div>
+
+	<script src="http://cdn.bootcss.com/jquery/3.1.0/jquery.min.js"></script>
+ 	<script>
+
+ 	var _Stickup = (function(){
+
+	 		function Stickup($ct){
+	 			this.$ct = $ct;
+				isFixed = false;
+				this.$height = $ct.height();
+				this.$width = $ct.width();
+				this.$offsetTop = $ct.offset().top;
+				this.$offsetLeft = $ct.offset().left;
+				this.$ctClone = $ct.clone().css({opacity:0,display:'none'}).insertBefore($ct);
+				this.bind();
+	 		};
+
+			Stickup.prototype.bind = function(){
+	 			var _this = this;
+	 				$(window).on('scroll',function(){
+						var $scrollTop = this.$(window).scrollTop();
+						if($scrollTop >=_this.$offsetTop){
+							if(!isFixed)_this.setFixed();
+						}else{
+							_this.unsetFixed();
+						}
+				})
+	 		};
+	 		Stickup.prototype.setFixed = function(){
+	 				this.$ct.css({
+							position:'fixed',
+							top:0,
+							left:this.$offsetLeft,
+							width:this.$width,
+							margin:0,
+							'z-index':999
+						})
+						isFixed = true;
+					this.$ctClone.show();
+	 		};
+	 		Stickup.prototype.unsetFixed = function(){
+	 				this.$ct.removeAttr('style');
+					this.$ctClone.hide();
+					isFixed = false;
+	 		};
+
+	 		return {
+	 			init: function($ct){
+	 				$ct.each(function(index,node){
+	 					new Stickup($(node));
+	 				})
+	 				// new Stickup($ct);
+	 			}
+	 		}
+ 		})();
+
+ 		_Stickup.init($('.nav'));
+ 		// _Stickup.init($('.main2'));
+
+
+
+/*
+ 	$.fn.stickup = function(){
+		var $ct = $(this),
+			isFixed = false,
+			$height = $ct.height(),
+			$width = $ct.width(),
+			$offsetTop = $ct.offset().top,
+			$offsetLeft = $ct.offset().left;
+ 	
+		var $ctClone = $ct.clone()
+						.css({
+							opacity:0,
+							display:'none'
+							})
+						.insertBefore($ct)
+
+		$(window).on('scroll',function(){
+			var $scrollTop = $(window).scrollTop()
+
+			if($scrollTop >= $offsetTop){
+				if(!isFixed)setFixed()
+			}else{
+				if(isFixed)unsetFixed()
+			
+			}
+		})
+		function setFixed(){
+				$ct.css({
+					position:'fixed',
+					top:0,
+					left:$offsetLeft,
+					width:$width,
+					margin:0,
+					'z-index':999
+				})
+				isFixed = true
+			$ctClone.show()
+		}
+		function unsetFixed(){
+			$ct.removeAttr('style')
+			$ctClone.hide()
+			isFixed = false
+		}
+	}
+
+$('.nav1').stickup()
+$('.nav2').stickup()
+$('.nav3').stickup()
+*/
+</script>
+</body>	
+</html>

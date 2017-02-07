@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>轮播组件</title>
+	<script src="http://apps.bdimg.com/libs/jquery/1.9.1/jquery.js"></script>
+<style>
+	ul,li{
+		margin: 0;
+		padding: 0;
+		list-style: none;
+	}
+	a{
+		text-decoration: none;
+	}
+	.carousel{
+		position: relative;		
+		width: 300px;
+		height: 200px;
+		margin: 30px auto;
+		overflow: hidden;
+		box-shadow: 2px 2px 10px #252525;	
+	}
+	.carousel .img-ct{
+		width: 1200px;		
+		height: 200px;
+		position: absolute;
+	}
+	.carousel .img-ct img{
+		width: 300px;
+		height: 200px;
+	}
+	.carousel .img-ct>li{
+		float: left;
+
+	}
+	.clearfix:after{
+		content:" ";
+		display: block;
+		clear: both;
+	}
+	.btn{
+		width: 30px;
+    	height: 30px;
+    	display: block;
+    	background-color: #ccc;
+    	border-radius: 50%;
+    	text-align: center;
+   	 	line-height: 30px;
+    	font-size: 18px;
+    	opacity: 0.6;
+    	color: #766262;
+    	position: absolute;
+    	top: 50%;
+    	margin-top: -18px;
+	}
+	.btn:hover{
+		opacity: 0.7;
+	}
+	.pre-btn{
+		left: 5px;
+	}
+	.next-btn{
+		right: 5px;
+	}
+	.carousel .bullet>li{
+    	width: 20px;
+    	height: 5px;
+   	 	border-radius: 3px;
+    	float: left;
+    	margin-left: 5px;
+    	background-color: white;
+	}
+	.carousel .bullet{
+    	position: absolute;
+    	bottom: 10px;
+    	left: 98px;
+	}
+	.carousel .bullet .active{
+		background-color: #9f9b9b;
+	}
+	h3{
+		text-align: center;
+    	color: #4c4b4b;
+	}
+</style>
+</head>
+<body>
+	<h3>轮播1</h3>
+	<div class="carousel">
+		<ul class="img-ct clearfix">
+			<li data-index=0><a href=""><img src="http://img05.tooopen.com/images/20150417/tooopen_sy_118991238222.jpg" alt=""></a></li>
+			<li data-index=1><a href=""><img src="http://img05.tooopen.com/images/20150419/tooopen_sy_119257626434.jpg" alt=""></a></li>
+			<li data-index=2><a href=""><img src="http://img02.tooopen.com/images/20150227/tooopen_sy_111434911259.jpg" alt=""></a></li>
+			<li data-index=3><a href=""><img src="http://img02.tooopen.com/images/20150806/tooopen_sy_136927663518.jpg" alt=""></a></li>
+		</ul>
+		<a href="#" class=" btn pre-btn">&lt;</a>
+		<a href="#" class="btn next-btn">&gt;</a>
+		<ul class=" bullet ">
+			<li class="active"></li>
+			<li></li>
+			<li></li>
+			<li></li>
+		</ul>
+	</div>
+	<h3>轮播2</h3>
+	<div class="carousel">
+		<ul class="img-ct clearfix">
+			<li data-index=2><a href=""><img src="http://4493bz.1985t.com/uploads/allimg/140821/3-140R1150040.jpg" alt=""></a></li>
+			<li data-index=0><a href=""><img src="http://www.yoka.com/dna/pics/ba1da33a/1/d359c9cdbee951db1b1.jpg.480.jpg" alt=""></a></li>
+			<li data-index=1><a href=""><img src="http://www.yoka.com/dna/pics/ba1da33a/1/d359c9cdb9b9adec751.jpg" alt=""></a></li>
+			<li data-index=3><a href=""><img src="http://4493bz.1985t.com/uploads/allimg/140822/3-140R2150424.jpg" alt=""></a></li>
+		</ul>
+		<a href="#" class=" btn pre-btn">&lt;</a>
+		<a href="#" class="btn next-btn">&gt;</a>
+		<ul class=" bullet ">
+			<li class="active"></li>
+			<li></li>
+			<li></li>
+			<li></li>
+		</ul>
+	</div>
+
+	<script>
+
+// 封装
+
+			var Carousel = (function(){
+
+				 function _Carousel($ct){
+				 	this.$ct = $ct;
+				 	this.init();
+				 	this.bind();
+
+				 }
+
+				_Carousel.prototype.init = function(){
+
+					var $imgCt = this.$imgCt = this.$ct.find('.img-ct'),
+			 			$preBtn = this.$preBtn = this.$ct.find('.pre-btn'),
+			 			$nextBtn = this.$nextBtn = this.$ct.find('.next-btn'),
+			 			$bullet = this.$bullet = this.$ct.find('.bullet');
+
+			 		var	$firstImg = $imgCt.find('li').first();
+			 		 	$lastImg = $imgCt.find('li').last();
+			 		 	
+						this.$imgWidth =$firstImg.width();
+			 		 	this.curPageIndex = 0;				// 默认第一张图片，下标初始值为 0 （范围0-3）
+			 		 	this.imgLength = $imgCt.children().length;					// imgLength = 4
+			 		 	this.isAnimate = false;									// 状态锁，重复点击无效
+
+			 		$imgCt.append($firstImg.clone())
+			 		$imgCt.prepend($lastImg.clone())
+
+			 		var imgLaterLength = $imgCt.width(this.$imgWidth * this.imgLength) 		 // imgLength 变为 6
+					$imgCt.css({left:0-this.$imgWidth,width:imgLaterLength}) // left 默认第一张图片，初始值为 -300
+				 }
+
+				   
+				_Carousel.prototype.bind = function(){
+				 		var _this = this;
+				 	this.$preBtn.on('click',function(e){
+			 			e.preventDefault()
+			 			_this.playPre()		
+		 		})
+		 			this.$nextBtn.on('click',function(e){
+			 			e.preventDefault()
+			 			_this.playNext()
+		 		})
+		 			this.$bullet.find('li').on('click',function(){	
+		 				var idx = $(this).index()	// 点击bullet时候，获取 下标
+		 				if(idx >_this.curPageIndex){
+		 					_this.playNext(idx-_this.curPageIndex)
+		 				}else{
+		 					_this.playPre(_this.curPageIndex-idx)
+		 			}
+	 			})
+		 			this.autoPlay();
+
+
+			}
+
+			 	_Carousel.prototype.playPre = function(num) {
+			 		var _this = this;
+			 		if(this.isAnimate)return
+	 				this.isAnimate = true
+	 				var num = num || 1
+
+	 				this.$imgCt.animate({
+	 				"left":'+='+this.$imgWidth*num
+	 				},function(){
+	 					_this.curPageIndex = (_this.curPageIndex-num+_this.imgLength)%_this.imgLength
+	 					if(_this.curPageIndex ===	_this.imgLength-1){    //  图片下标是最后一张时候，
+	 						_this.$imgCt.css({left:0-(_this.imgLength*_this.$imgWidth*num)})
+	 					}	
+	 					_this.isAnimate = false
+	 					_this.setBullet()
+	 				})					
+	 			}
+
+
+	 			_Carousel.prototype.playNext = function(num){
+	 				var _this = this;
+	 				var num = num || 1		//	参数num是点击 bullet小图标格数，默认 1格
+		 			if(this.isAnimate)return
+		 			this.isAnimate = true
+		 			
+		 			this.$imgCt.animate({
+		 				left:"-="+this.$imgWidth*num
+		 			},function(){
+		 				// console.log(curPageIndex)
+		 				_this.curPageIndex=(_this.curPageIndex+num)%_this.imgLength   // imgLength 初始值 4，curPageIndex为当前展示的图片序号
+		 				// console.log(imgLength)
+		 				// console.log(curPageIndex)
+		 				if(_this.curPageIndex === 0){
+		 					_this.$imgCt.css({left:0-_this.$imgWidth})
+		 				 	_this.curPageIndex = 0
+		 				}
+		 				_this.isAnimate = false
+		 				_this.setBullet()
+	 				})	
+	 			}
+
+	 			_Carousel.prototype.setBullet = function() {
+	 			 	this.$bullet.children().removeClass('active').eq(this.curPageIndex).addClass('active')
+
+	 			 }
+
+		 		_Carousel.prototype.autoPlay = function(){
+		 			var _this = this;
+	 					clock = setInterval(function(){
+	 					_this.playNext()
+	 				},3000)
+	 			}
+
+	 			return {
+	                init: function($ct){
+	                    $ct.each(function(index, node){
+	                        new _Carousel($(node));
+	                    })
+	                }
+           	 	}
+
+			})()
+
+			Carousel.init($('.carousel'));   
+
+	 </script>
+</body>
+</html>

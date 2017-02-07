@@ -1,0 +1,338 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>tab切换实战</title>
+    <style>
+        ul,li{
+            margin: 0;
+            padding: 0;
+        }
+        a{text-decoration: none;}
+
+        li {
+            list-style: none;
+        }
+        
+        .tab {
+            width: 640px;
+            margin: 20px auto;
+            border: 1px solid #ccc;
+            padding: 20px 10px;
+            border-radius: 4px;
+        }
+        
+        .tab-header {
+            border-bottom: 1px solid #ccc;
+        }
+        
+        .tab-header>li {
+            float: left;
+            color: brown;
+            border-top: 1px solid #fff;
+            border-left: 1px solid #fff;
+            border-right: 1px solid #fff;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+        
+        .tab-header .active {
+            border: 1px solid #ccc;
+            border-bottom-color: #fff;
+            border-radius: 4px 4px 0 0;
+            color: #333;
+            margin-bottom: -1px;
+        }
+
+        .clearfix:after{
+            content:'';
+            display: block;
+            clear: both;
+        }
+        .tab-container>li {
+            display: none;
+        }
+        
+        .tab-container>.active {
+            display: block;
+        }
+        
+    
+        .tab-container{
+
+            margin-top: 20px;
+        }
+        .tab-container .panel li{
+            float: left;
+            border: 1px solid #e8e4e4;
+            box-sizing: border-box;
+            box-shadow: 2px 3px 4px #d8d0d0;
+        }
+        .prod{
+            text-align: center;
+            font-size: 15px;
+            margin-top: 10px;
+            margin-left: 10px; 
+            position: relative;
+
+        }
+
+        .prod-price{
+            color: #d41b1b;
+        }
+        .prod a{
+            width: 200px;
+            display: block;
+        }
+        .prod img{
+            width: 180px;
+            padding: 5px;
+        }
+        img:hover{
+          transform: scale(1.05,1.05);
+        }
+        /*.prod a:hover{*/
+            /*box-shadow: 2px 2px 10px #252525;*/
+        /*}*/
+       .tab-container .prod a,
+       .tab-container .prod img{
+            transition: 0.5s;
+        }
+
+    </style>
+
+</head>
+
+<body>
+    <div class="tab">
+        <ul class="tab-header clearfix">
+            <li class="active">电脑</li>
+            <li>手机</li>
+            <li>汽车</li>
+        </ul>
+        <ul class="tab-container">
+            <li class="panel active">
+                <ul class="prod-ct clearfix">
+<!-- panel1 -->
+                    <li class="prod">
+                        <a href="">
+                            <img src="http://img13.360buyimg.com/n1/jfs/t2191/334/2921047884/217714/eb1dd389/571f1329Ne4122e4c.jpg" alt="">
+                            <div class="prod-name">2015款MacBook Air</div>
+                            <div class="prod-price">￥6999.00</div>
+                        </a>
+                    </li>
+                    <li class="prod">
+                        <a href="">
+                            <img src="http://img11.360buyimg.com/n1/jfs/t2518/52/10378951/105842/413f9b3d/5631d2b6N8fa76f15.jpg" alt="">
+                            <div class="prod-name">2015款MacBook Pro</div>
+                            <div class="prod-price">￥9999.00</div>
+                        </a>
+                    </li>
+                    <li class="prod">
+                        <a href="">
+                            <img src="http://img11.360buyimg.com/n1/jfs/t2623/309/3238324548/210790/c8752c4f/57870c1dN9d5cb51d.jpg" alt="">
+
+                            <div class="prod-name">ThinkPad X1</div>
+                            <div class="prod-price">￥28499.00</div>
+                        </a>
+                    </li>
+                    <li class="prod">
+                        <a href="">
+                            <img src="http://img12.360buyimg.com/n1/jfs/t2611/44/3196275698/103797/7b098d5/5783380aN1a0c0179.jpg" alt="">
+                            <div class="prod-name">宏碁(acer)G9</div>
+                            <div class="prod-price">￥17999.00</div>
+                        </a>
+                    </li>
+                    <li class="prod">
+                        <a href="">
+                            <img src="http://img13.360buyimg.com/n1/jfs/t2791/189/3341762545/267247/8713141f/57889da7N49fe4f0d.jpg" alt="">
+                            <div class="prod-name">微星GT810s</div>
+                            <div class="prod-price">￥33999.00</div>
+                        </a>
+                    </li>
+                    <li class="prod">
+                        <a href="">
+                            <img src="http://img11.360buyimg.com/n1/jfs/t1864/211/1356949790/101519/22124b5/569850f4Nb895b9c9.jpg" alt="">
+                            <div class="prod-name">Alienware</div>
+                            <div class="prod-price">￥23999.00</div>
+                        </a>
+                    </li>
+
+                </ul>
+            </li>
+<!-- panel2            -->
+
+            <li class="panel ">
+                <ul class="prod-ct clearfix">
+                    <li class="prod">
+                        <a href="" class="img-st">
+                            <img src="http://img13.360buyimg.com/n1/s450x450_jfs/t3286/271/2692886276/116415/743fa573/57e4a37aN4b5421ed.jpg" alt="">
+                            <div class="prod-name">Apple iphone6s</div>
+                            <div class="prod-price">￥4788.00</div>
+                        </a>
+                    </li>
+                    <li class="prod">
+                        <a href="" class="img-st">
+                            <img src="http://img14.360buyimg.com/n1/s450x450_jfs/t829/220/1484969445/251419/7fcf4272/57304539Ne0e0f175.jpg" alt="">
+                            <div class="prod-name">小米5</div>
+                            <div class="prod-price">￥2399.00</div>
+                        </a>
+                    </li> 
+                    <li class="prod">
+                        <a href="" class="img-st">
+                            <img src="http://img10.360buyimg.com/n1/s450x450_jfs/t2413/190/2594527265/57444/8045a2c/56e987efN32aa204c.jpg" alt="">
+                            <div class="prod-name">OPPO R9</div>
+                            <div class="prod-price">￥2499.00</div>
+                        </a>
+                    </li>
+                    <li class="prod">
+                        <a href="" class="img-st">
+                            <img src="http://img14.360buyimg.com/n1/s450x450_jfs/t3256/127/1254074435/244838/a74d3cb7/57c8d722Nfd1372a0.jpg" alt="">
+                            <div class="prod-name">荣耀8</div>
+                            <div class="prod-price">￥2299.00</div>
+                        </a>
+                    </li>
+                    <li class="prod">
+                        <a href="" class="img-st">
+                            <img src="http://img12.360buyimg.com/n1/s450x450_jfs/t2755/258/2923249158/682341/f39c29bf/577b554bN0f417f78.png" alt="">
+                            <div class="prod-name">vivo X7</div>
+                            <div class="prod-price">￥2499.00</div>
+                        </a>
+                    </li>
+                    <li class="prod">
+                        <a href="" class="img-st">
+                            <img src="http://img12.360buyimg.com/n1/s450x450_jfs/t3103/272/2780558524/186875/fdad72f0/57e7363dN3dff9d40.jpg" alt="">
+                            <div class="prod-name">红米 Note4</div>
+                            <div class="prod-price">￥1199.00</div>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+
+ <!-- panel3 -->
+            <li class="panel">
+                <ul class="prod-ct clearfix">
+                    <li class="prod">
+                        <a href="">
+                            <img src="http://img12.360buyimg.com/n1/jfs/t2908/175/559804235/79217/b9c31a76/571a27deNe2cf655f.jpg" alt="">
+                            <div class="prod-name">宝沃BX7</div>
+                            <div class="prod-price">￥99.00</div>
+                        </a>
+                    </li>
+                    <li class="prod">
+                        <a href="">
+                            <img src="http://img14.360buyimg.com/n1/jfs/t2677/59/3468816083/149555/9f317c0/578ef0aeN2bb7deb6.jpg" alt="">
+                            <div class="prod-name">长安 CS75</div>
+                            <div class="prod-price">￥99.00</div>
+                        </a>
+                    </li>
+                    <li class="prod">
+                        <a href="">
+                            <img src="http://img14.360buyimg.com/n1/jfs/t2923/327/117955618/147487/d656004/574d02b1N705d7b0b.jpg" alt="">
+                            <div class="prod-name">大众 捷达</div>
+                            <div class="prod-price">￥99.00</div>
+                        </a>
+                    </li>
+                    <li class="prod">
+                        <a href="">
+                            <img src="http://img14.360buyimg.com/n1/jfs/t3244/77/1282334705/45540/66a79255/57c8e405N2c4d8944.jpg" alt="">
+                            <div class="prod-name">凌渡GTS</div>
+                            <div class="prod-price">￥99.00</div>
+                        </a>
+                    </li>
+                    <li class="prod">
+                        <a href="">
+                            <img src="http://img11.360buyimg.com/n1/jfs/t2950/222/142626492/67544/f0c82e6e/574d02adN1f1e0a22.jpg" alt="">
+                            <div class="prod-name">大众 宝来</div>
+                            <div class="prod-price">￥99.00</div>
+                        </a>
+                    </li>
+                    <li class="prod">
+                        <a href="">
+                            <img src="http://img12.360buyimg.com/n1/jfs/t1738/124/749041340/71894/2da0721f/55d7cccdN812342d6.jpg" alt="">
+                            <div class="prod-name">陆风X7 </div>
+                            <div class="prod-price">￥99.00</div>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+
+    </div>
+
+    <script>
+// 构造函数封装    
+
+        function Tab(ct) {
+            this.ct = ct;
+            this.init();
+            this.bind();
+        }
+
+        Tab.prototype.init = function() {
+            this.tabLis = this.ct.querySelectorAll('.tab-header>li');
+            this.tabPanels = this.ct.querySelectorAll('.tab-container>li');
+        }
+        Tab.prototype.bind = function() {
+            var _this = this;
+            this.tabLis.forEach(function(tabli) {
+                tabli.onclick = function(e) {
+                    var target = e.target;
+                    var index = [].indexOf.call(_this.tabLis, target);  // 因为this.tabli 是类数组对象，没有indexOf 这个用法
+                    _this.tabLis.forEach(function(li) {
+                        li.classList.remove('active');
+                    })
+                    target.classList.add('active');
+
+                    _this.tabPanels.forEach(function(panel) {
+                        panel.classList.remove('active');
+                    })
+                    _this.tabPanels[index].classList.add('active');
+                }
+            })
+        }
+
+        var tab1 = new Tab(document.querySelectorAll('.tab')[0]);
+        var tab2 = new Tab(document.querySelectorAll('.tab')[1]);
+
+//模块化一：简单封装
+    // var Tab = (function(){
+
+    //     function init(ct){
+
+    //         TabCt = ct.getElementsByClassName('.tab-header');
+    //         tabLis = ct.querySelectorAll('.tab-header>li');
+    //         tabPanels = ct.querySelectorAll('.tab-container>li');
+
+    //         TabCt.addEventListener('click',function(e){
+    //             if(e.target.tagName.toLowerCase === 'li'){
+    //                 var target = e.target;
+    //                 var index = [].indexOf.call(tabLis, target);  // 因为this.tabli 是类数组对象，没有indexOf 这个用法
+    //                 tabLis.forEach(function(li) {
+    //                     li.classList.remove('active');
+    //                 })
+    //                 target.classList.add('active');
+
+    //                 tabPanels.forEach(function(panel) {
+    //                     panel.classList.remove('active');
+    //                 })
+    //                 tabPanels[index].classList.add('active');
+    //             }
+    //         },false)
+    //     }
+
+    //     var obj = {
+    //         init:init
+    //     };
+    //     return obj;
+
+    // })();
+
+    // document.querySelectorAll('.tab').forEach(function(ct){
+    //     Tab.init(ct)
+    // });
+
+    </script>
+</body>
+</html>
